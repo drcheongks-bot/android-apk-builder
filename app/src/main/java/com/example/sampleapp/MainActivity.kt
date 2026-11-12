@@ -1,29 +1,26 @@
 package com.example.sampleapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    private var clickCount = 0
-
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val welcomeText = findViewById<TextView>(R.id.welcomeText)
-        val clickButton = findViewById<Button>(R.id.clickButton)
-        val countText = findViewById<TextView>(R.id.countText)
+        val webView = WebView(this)
+        // Enable JavaScript for your ad timer
+        webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
+        webView.webViewClient = WebViewClient()
 
-        clickButton.setOnClickListener {
-            clickCount++
-            countText.text = "Button clicked $clickCount times"
-            
-            if (clickCount % 5 == 0) {
-                Toast.makeText(this, "Wow! You've clicked $clickCount times!", Toast.LENGTH_SHORT).show()
-            }
-        }
+        // REPLACE WITH YOUR MAC'S IP ADDRESS (e.g., 192.168.1.50)
+        val macIp = "YOUR_MAC_IP_ADDRESS_HERE" 
+        webView.loadUrl("http://$macIp:8000/fas.php?test=1&gatewayname=TEST-AP")
+
+        setContentView(webView)
     }
 }
