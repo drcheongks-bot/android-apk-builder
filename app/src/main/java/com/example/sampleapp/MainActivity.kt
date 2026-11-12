@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         webView.webViewClient = WebViewClient()
 
         // REPLACE WITH YOUR MAC'S IP ADDRESS (e.g., 192.168.1.50)
-        val macIp = "YOUR_MAC_IP_ADDRESS_HERE" 
+        val macIp = "192.168.43.23" 
         webView.loadUrl("http://$macIp:8000/fas.php?test=1&gatewayname=TEST-AP")
 
         setContentView(webView)
